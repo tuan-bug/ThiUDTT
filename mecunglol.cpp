@@ -33,8 +33,11 @@ void Output2(int arr[100][100]){
     {
         for(j=1;j<M+1;j++)
         {
-            cout<<arr[i][j]<<"  ";
+            //cout<<arr[i][j]<<"  ";
             out<<arr[i][j]<<"  ";
+            if(arr[i][j] == 1){
+            	cout <<"( " << i <<", " <<j <<")" <<endl;
+			}
             
         }
         cout<<endl;
@@ -47,12 +50,12 @@ int solvemaze(int r, int c){
     //Diem xuat phat luon la o vi tri 1,1
     //Diem ket thuc luon la o vi tri cuoi cung là N,N
     //Khi o vi tri cuoi cung ket thuc recursive
-    if((r==e1)  && (c==e2) ){
+    if((r==e1)  && (c==e2) && maze[e1][e2] == 0 ){
         solution[r][c] = 1;
         return 1;
     }
     
-    while(r == N && maze[r][c] == 0 && c < N && solution[r][c] == 0){
+    while(r == N && maze[r][c] == 0 && c < M && solution[r][c] == 0){
     	solution[r][c] = 1;
     	// dex phai
     	 if(solvemaze(r, c+1))
@@ -71,7 +74,7 @@ int solvemaze(int r, int c){
             return 1;
 	}
 	// doc
-	while(c == N && maze[r][c] == 0 && solution[r][c] == 0 && maze[r][c] == 0 && r < N){
+	while(c == M && maze[r][c] == 0 && solution[r][c] == 0 && maze[r][c] == 0 && r < N){
     	solution[r][c] = 1;
     	//di xuong
         if(solvemaze(r+1, c))
@@ -94,7 +97,7 @@ int solvemaze(int r, int c){
     //Tat ca cac o phai nam trong khoang (0,N-1) nam ngoai khoang khong the di duoc
     //Kiem tra cach giai solution[r][c] da di chua?, neu nam trong cac duong da di thi lien tuc backtracking
     //kiem tra maze[r][c] xem co bi chan khong?
-    if((r < N || c < N )&& solution[r][c] == 0 && maze[r][c] == 0)
+    if((r < N || c < M )&& solution[r][c] == 0 && maze[r][c] == 0)
     {
         //Thoa man dieu kien tren thi duoc di, gan 1
         solution[r][c] = 1;
